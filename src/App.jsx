@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from './supabaseClient';
 import Login from './Login';
 
-// ─── CLAVE PERMANENTE — NUNCA CAMBIAR ───────────────────────────────────────
+// ─── CLAVE PERMANENTE — NUNCA typeofeClient'eClient' ───────────────────────────────────────
 const STORAGE_KEY = "raiz-cultivo-MASTER";
 const SCHEMA_VERSION = 5;
 
@@ -31,7 +31,7 @@ const migrate = (raw) => {
 const buildDefault = () => ({
   __version: SCHEMA_VERSION,
   flora1:    { currentWeek:1, plantas:{}, notes:{} },
-  flora2:    { currentWeek:1, plantas:{}, notes:{} },
+  flora2:    { currentWeek:1, plantas:{},flora3:{} },
   flora3:    { currentWeek:1, plantas:{}, notes:{} },
   enraizado: { currentWeek:1, notes:{} },
   v150:      { currentWeek:1, notes:{} },
@@ -113,7 +113,8 @@ export default function App() {
   const [newC,   setNewC]   = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [usuario, setUsuario] = useState(null);
-
+const esEjecutor = usuario?.rol === 'ejecutor';
+  
   useEffect(()=>{
     (async()=>{
       try{
@@ -258,9 +259,9 @@ export default function App() {
                         <div style={{fontSize:"11px",color:TIPO_COLOR[g.tipo],marginTop:"2px"}}>{TIPO_LABEL[g.tipo]}</div>
                       </div>
                       <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                        <button onClick={()=>setPlant(tab,g.id,qty-1)} style={{width:"34px",height:"34px",borderRadius:"8px",fontSize:"18px",fontWeight:"700",background:"#1a2e1a",color:qty>0?"#e0f0d0":"#3a5a3a",border:`1px solid ${qty>0?"#3a6a3a":"#1a3a1a"}`}}>−</button>
+                        <button disabled={esEjecutor} onClick={()=>setPlant(tab,g.id,qty-1)} style={{width:"34px",height:"34px",borderRadius:"8px",fontSize:"18px",fontWeight:"700",background:"#1a2e1a",color:qty>0?"#e0f0d0":"#3a5a3a",border:`1px solid ${qty>0?"#3a6a3a":"#1a3a1a"}`,opacity:esEjecutor?0.4:1,cursor:esEjecutor?"not-allowed":"pointer"}}>−</button>
                         <span style={{fontSize:"20px",fontWeight:"700",minWidth:"28px",textAlign:"center",color:qty>0?g.color:"#3a5a3a"}}>{qty}</span>
-                        <button onClick={()=>setPlant(tab,g.id,qty+1)} style={{width:"34px",height:"34px",borderRadius:"8px",fontSize:"18px",fontWeight:"700",background:"#1a2e1a",color:"#7ec850",border:"1px solid #2a5a2a"}}>+</button>
+                        <button disabled={esEjecutor} onClick={()=>setPlant(tab,g.id,qty+1)} style={{width:"34px",height:"34px",borderRadius:"8px",fontSize:"18px",fontWeight:"700",background:"#1a2e1a",color:"#7ec850",border:"1px solid #2a5a2a",opacity:esEjecutor?0.4:1,cursor:esEjecutor?"not-allowed":"pointer"}}>+</button>
                       </div>
                     </div>
                   );
@@ -387,7 +388,7 @@ export default function App() {
                 </div>
               </div>
             ):(
-              <button onClick={()=>setNewC(emptyCosecha())} style={{width:"100%",padding:"14px",borderRadius:"12px",fontSize:"14px",fontWeight:"600",background:"#1e2808",color:"#c8a020",border:"2px dashed #5a4a10",marginBottom:"20px"}}>+ Registrar nueva cosecha</button>
+              {!esEjecutor && <button onClick={()=>setNewC(emptyCosecha())} style={{width:"100%",padding:"14px",borderRadius:"12px",fontSize:"14px",fontWeight:"600",background:"#1e2808",color:"#c8a020",border:"2px dashed #5a4a10",marginBottom:"20px"}}>+ Registrar nueva cosecha</button>}
             )}
 
             {(db.cosechas||[]).length>0&&(
