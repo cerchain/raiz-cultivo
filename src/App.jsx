@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { supabase } from './supabaseClient';
+
 
 // ─── CLAVE PERMANENTE — NUNCA CAMBIAR ───────────────────────────────────────
 const STORAGE_KEY = "raiz-cultivo-MASTER";
