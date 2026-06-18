@@ -31,7 +31,7 @@ const migrate = (raw) => {
 const buildDefault = () => ({
   __version: SCHEMA_VERSION,
   flora1:    { currentWeek:1, plantas:{}, notes:{} },
-  flora2:    { currentWeek:1, plantas:{},flora3:{} },
+  flora2:    { currentWeek:1, plantas:{}, notes:{} },
   flora3:    { currentWeek:1, plantas:{}, notes:{} },
   enraizado: { currentWeek:1, notes:{} },
   v150:      { currentWeek:1, notes:{} },
