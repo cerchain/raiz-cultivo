@@ -213,7 +213,7 @@ const esEjecutor = usuario?.rol === 'ejecutor';
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"14px"}}>
           <div>
             <div style={{fontFamily:"'DM Serif Display',serif",fontSize:"22px",color:"#7ec850"}}>🌱 RAÍZ — Cuaderno de Cultivo</div>
-            <div style={{fontSize:"11px",color:"#4a8a4a",letterSpacing:"2px",marginTop:"4px"}}>12 GENÉTICAS / FENOTIPOS · SISTEMA ESCALONADO</div>
+            <div style={{fontSize:"11px",color:"#4a8a4a",letterSpacing:"2px",marginTop:"4px"}}>{usuario?.nombre} · {esEjecutor?"EJECUTOR":"MASTER GROWER"}</div>
           </div>
           <div style={{textAlign:"right",maxWidth:"200px"}}>
             {status==="guardado"&&<div style={{fontSize:"12px",color:"#7ec850",background:"#1a3a1a",padding:"5px 14px",borderRadius:"20px",border:"1px solid #3a6a3a"}}>✓ guardado</div>}
