@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from './supabaseClient';
 import Login from './Login';
 
-// ─── CLAVE PERMANENTE — NUNCA typeofeClient'eClient' ───────────────────────────────────────
+// ─── CLAVE PERMANENTE — NUNCA CAMBIAR ───────────────────────────────────────
 const STORAGE_KEY = "raiz-cultivo-MASTER";
 const SCHEMA_VERSION = 5;
 
