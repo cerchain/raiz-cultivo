@@ -388,7 +388,7 @@ const esEjecutor = usuario?.rol === 'ejecutor';
                 </div>
               </div>
             ):(
-              {!esEjecutor && <button onClick={()=>setNewC(emptyCosecha())} style={{width:"100%",padding:"14px",borderRadius:"12px",fontSize:"14px",fontWeight:"600",background:"#1e2808",color:"#c8a020",border:"2px dashed #5a4a10",marginBottom:"20px"}}>+ Registrar nueva cosecha</button>}
+              <div>{!esEjecutor && <button onClick={()=>setNewC(emptyCosecha())} style={{width:"100%",padding:"14px",borderRadius:"12px",fontSize:"14px",fontWeight:"600",background:"#1e2808",color:"#c8a020",border:"2px dashed #5a4a10",marginBottom:"20px"}}>+ Registrar nueva cosecha</button>}</div>
             )}
 
             {(db.cosechas||[]).length>0&&(
