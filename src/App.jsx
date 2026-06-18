@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from './supabaseClient';
-
+import Login from './Login';
 
 // ─── CLAVE PERMANENTE — NUNCA CAMBIAR ───────────────────────────────────────
 const STORAGE_KEY = "raiz-cultivo-MASTER";
@@ -112,6 +112,7 @@ export default function App() {
   const [gFilter,setGFilter]= useState("all");
   const [newC,   setNewC]   = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [usuario, setUsuario] = useState(null);
 
   useEffect(()=>{
     (async()=>{
@@ -185,6 +186,7 @@ export default function App() {
     {key:"cosechas", label:"📦 Cosechas", col:"#c8a020"}
   ];
 
+  if(!usuario) return <Login onLogin={setUsuario} />;
   if(!loaded) return(
     <div style={{background:"#0e160e",minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'IBM Plex Mono',monospace",color:"#4a7a4a",fontSize:"14px"}}>
       Cargando datos...
